@@ -2,6 +2,9 @@ import Link from "next/link";
 import StarsRating from "./ratings";
 
 const Card = ({ product }) => {
+  if (!product) {
+    return null;
+  }
   return (
     <Link
       href={`/products/${product.id}`}
