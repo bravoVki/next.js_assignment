@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import Card from "../components/card";
 
 // Component for rendering each category button
-const ProductCategory = ({ category, onClick, selectedCategory }) => {
-  const isSelected = selectedCategory === category;
-
+const ProductCategory = ({ category, onClick, selectedCategory, isFirst }) => {
+  const isSelected =
+    selectedCategory === category || (isFirst && selectedCategory === "");
+  useEffect(() => {
+    if (isFirst) {
+      onClick(category);
+    }
+  }, []);
   return (
     <button
       onClick={() => onClick(category)}
@@ -14,33 +19,6 @@ const ProductCategory = ({ category, onClick, selectedCategory }) => {
     >
       {category}
     </button>
-  );
-};
-
-// Component for rendering each product card
-const Card = ({ product }) => {
-  return (
-    <Link
-      href={`/products/${product.id}`}
-      className="bg-white rounded-lg shadow-lg p-4 m-4"
-    >
-      <img
-        src={product.thumbnail}
-        alt={product.title}
-        className="w-full h-48 object-cover"
-      />
-      <div className="mt-4">
-        <h2 className="text-xl font-semibold">Title: {product.title}</h2>
-        <p className="text-gray-600">
-          <b>Desc: </b>
-          {product.description}
-        </p>
-        <div className="flex justify-between mt-4">
-          <p className="text-gray-900 font-semibold">Price: ${product.price}</p>
-          <p className="text-gray-600">{product.rating} stars</p>
-        </div>
-      </div>
-    </Link>
   );
 };
 
@@ -70,9 +48,7 @@ const Products = () => {
 
   return (
     <div className="flex flex-col lg:flex-row">
-      {/* Flex container for responsiveness */}
       <div className="lg:w-1/10">
-        {/* Width set to 20% for large screens */}
         {/* Category buttons */}
         <div className="flex flex-col">
           {categories.map((category) => (
@@ -86,7 +62,6 @@ const Products = () => {
         </div>
       </div>
       <div className="lg:w-4/5">
-        {/* Width set to 80% for large screens */}
         {/* Product cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center">
           {products.map((product) => (

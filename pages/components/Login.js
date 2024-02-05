@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router"; // Import useRouter hook
-// import ProductPage from "../products"; //import ma error
+import { useRouter } from "next/router";
+import Products from "../products/index";
+
 const Login = () => {
-  const router = useRouter(); // Initialize useRouter hook
-  const [username, setUsername] = useState(""); // Change to username
+  const router = useRouter();
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [email, setEmail] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -26,34 +26,24 @@ const Login = () => {
       }
 
       const data = await response.json();
-
-      // Assuming the server returns a token upon successful login
-      const token = data.token;
-
-      // Store the token in localStorage or sessionStorage
-      localStorage.setItem("token", token);
-      //fetch email from the response and store it in state
-      setEmail(data.email);
+      localStorage.setItem("email", data.email); // Store email in local storage
 
       // Redirect to product page
-      router.push({
-        pathname: "/products",
-        query: { email: data.email }, // Pass email as a query parameter
-      });
+      router.push("/products");
     } catch (error) {
-      setError("Invalid username or password"); // Change error message
+      setError("Invalid username or password");
     }
   };
-  // useEffect to log email whenever it changes
-  useEffect(() => {
-    console.log(email);
-  }, [email]);
+  // useEffect to log email
+  // useEffect(() => {
+  //   console.log(email);
+  // }, [email]);
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-4">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            LogIn to your account
+            Log-In to your account
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
@@ -67,12 +57,12 @@ const Login = () => {
                 id="username"
                 name="username"
                 type="text"
-                autoComplete="username" // Change to username
+                autoComplete="username"
                 required
-                value={username} // Change to username
-                onChange={(e) => setUsername(e.target.value)} // Change to setUsername
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Username" // Change to Username
+                placeholder="Username"
               />
             </div>
             <div>
@@ -90,32 +80,6 @@ const Login = () => {
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border mt-5 border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
               />
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-              />
-              <label
-                htmlFor="remember-me"
-                className="ml-2 block text-sm text-gray-900"
-              >
-                Remember me
-              </label>
-            </div>
-
-            <div className="text-sm">
-              <a
-                href="#"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                Forgot your password?
-              </a>
             </div>
           </div>
 

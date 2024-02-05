@@ -1,8 +1,17 @@
+import { useRouter } from "next/router";
+import ProductDetails from "./details";
 import { useParams } from "next/navigation";
+
 const ProductDetail = () => {
+  const router = useRouter();
+  // const { id } = router.query;
   const params = useParams();
-  console.log(params);
-  if (params) return <div>hello products detaail {params.id}</div>;
+  return (
+    <div>
+      {/* Pass the id prop to ProductDetails component */}
+      <ProductDetails id={params.id} />
+    </div>
+  );
 };
 
 export default ProductDetail;

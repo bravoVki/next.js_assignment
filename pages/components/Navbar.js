@@ -1,5 +1,7 @@
+import React from "react";
 import { useState } from "react";
 import Link from "next/link";
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -38,13 +40,13 @@ const Navbar = () => {
           </div>
           <ul className="hidden sm:flex space-x-4">
             <li>
-              <a href="#" className="text-white">
+              <Link href="/components/Login" className="text-white">
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <Link href="/components/explore" className="text-white">
-                Explore
+              <Link href="/products" className="text-white">
+                Products
               </Link>
             </li>
             <li>
@@ -53,8 +55,8 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link href="/components/login" className="text-white">
-                Login
+              <Link href="/components/explore" className="text-white">
+                Explore
               </Link>
             </li>
           </ul>
