@@ -67,24 +67,24 @@ const Navbar = () => {
         <div className="sm:hidden">
           <ul className="bg-gray-800 py-2 px-4">
             <li>
-              <a href="#" className="text-white block py-2">
+              <Link href="/components/Login" className="text-white">
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="text-white block py-2">
-                Explore
-              </a>
+              <Link href="/products" className="text-white">
+                Products
+              </Link>
             </li>
             <li>
-              <a href="#" className="text-white block py-2">
+              <Link href="/products/category" className="text-white">
                 Categories
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="text-white block py-2">
-                Login
-              </a>
+              <Link href="/components/explore" className="text-white">
+                Explore
+              </Link>
             </li>
           </ul>
         </div>
